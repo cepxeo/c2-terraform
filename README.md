@@ -1,7 +1,11 @@
 
 ### C2 Deployment on AWS / Azure with Terraform
 
-Terraform scripts to create HTTP/S redirectors on AWS and Azure along with Cobalt Strike server on Azure.
+Terraform scripts to create HTTP/S redirectors on AWS and Azure along with Cobalt Strike server on Azure. Besides the resources deployment automates the following:
+
+* Setup the nginx for redirection with custom config to forward CS beacon requests only.
+* Generation and registration of SSL certificate via Let's Encrypt and certbot.
+* CS installation delivery to the C2 server and preps required to run the teamserver.
 
 #### Building C2 Server
 
@@ -14,13 +18,13 @@ cd azure-cobalt && terraform init && terraform apply
 ```
 
 Once the build is completed and outputs printed, save the private key to access the server over SSH.
-Note the public IP of the server
+Note the public IP of the server.
 
 #### Building HTTP/S redirect server on Azure / AWS
 
 * Ensure you have a domain name registered.
 * Open the DNS Management for your domain and be ready to change the `A Record` to the IP generated during the following build process.
-* For Azure, fill in `azure-redir\terraform.tfvars` with your domain name, Public IP of previously created C2 server and Azure secrets. Change AAA in arm_subnet_id to your subscription ID.
+* For Azure, fill in `azure-redir\terraform.tfvars` with your domain name, Public IP of previously created C2 server and Azure secrets. Change `AAA` in arm_subnet_id to your subscription ID.
 * For AWS fill in `aws\terraform.tfvars` with your domain name, Public IP of previously created C2 server and AWS secrets.
 * Execute the build.
 
