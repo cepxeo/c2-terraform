@@ -15,10 +15,10 @@ Terraform scripts to create HTTP/S redirectors on AWS and Azure along with Cobal
 * Execute the build.
 
 ```
-cd azure-cobalt; terraform init; terraform apply; cd ..
+cd azure-cobalt; terraform init; terraform apply
 ```
 
-Once the build is completed and outputs printed, save the private key to access the server over SSH.
+SSH key will be generated and saved in the current folder.
 Note the public IP of the server.
 
 #### Building HTTP/S redirect server on Azure / AWS
@@ -36,16 +36,16 @@ cd aws; terraform init; terraform apply
 
 Important!!! Follow the server creation process. Once the public IP is printed to the screen, update the DNS `A Record` in your domain DNS Management immediately. It will be used on the last build stage by the certbot during the SSL certificate registration.
 
-Once the build is completed and outputs printed, save the SSH private key and public IP to access the server later.
+SSH key will be generated and saved in the current folder.
 
 #### Destroying C2
 
 Ensure you follow the next order:
 
 ```
-cd azure-redir; terraform destroy -auto-approve; cd ..
-cd azure-cobalt; terraform destroy -auto-approve; cd ..
-cd aws; terraform destroy -auto-approve; cd ..
+cd azure-redir; terraform destroy -auto-approve
+cd azure-cobalt; terraform destroy -auto-approve
+cd aws; terraform destroy -auto-approve
 ```
 
 #### Post deployment (optional)
